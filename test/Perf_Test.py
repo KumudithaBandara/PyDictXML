@@ -1,10 +1,10 @@
 import timeit
 import xml.etree.ElementTree as ET
 from lxml import etree
-from DictToXML import dicttoxml as DictToXML
-import DictToXML2
+from PyDictXML import dicttoxml as PyDictXML
 import dicttoxml
 from json2xml import json2xml
+
 
 # Sample dictionary with various data types
 sample_dict = {
@@ -32,14 +32,9 @@ sample_dict = {
 }
 
 
-# Define conversion functions
-def DictToXML_convert():
-    output = DictToXML(sample_dict)
-    return output
-
-
-def DictToXML2_convert():
-    output = DictToXML2.dicttoxml(sample_dict)
+# Conversion methods
+def pydictxml_convert():
+    output = PyDictXML(sample_dict)
     return output
 
 
@@ -67,7 +62,7 @@ def json2xml_convert():
     return xml_data
 
 
-# Define a function to convert dict to xml using xml.etree.ElementTree
+# Convert dict to xml using xml.etree.ElementTree
 def dict_to_etree(d, parent):
     for key, value in d.items():
         if isinstance(value, dict):
@@ -90,28 +85,23 @@ num_iterations_list = [1, 10, 100, 500, 1000, 2000, 5000]
 
 for num_iterations in num_iterations_list:
     print(f"\n\nBenchmarking for {num_iterations} iterations:")
-    results = {}
+    results = dict()
 
-    results['DictToXML'] = timeit.timeit(DictToXML_convert, number=num_iterations)
-    # results['DictToXML2'] = timeit.timeit(DictToXML2_convert, number=num_iterations)
-    # results['xml.etree.ElementTree'] = timeit.timeit(etree_convert, number=num_iterations)
-    # results['lxml'] = timeit.timeit(lxml_convert, number=num_iterations)
+    results['DictToXML'] = timeit.timeit(pydictxml_convert, number=num_iterations)
+    results['xml.etree.ElementTree'] = timeit.timeit(etree_convert, number=num_iterations)
+    results['lxml'] = timeit.timeit(lxml_convert, number=num_iterations)
     results['dicttoxml'] = timeit.timeit(dicttoxml_convert, number=num_iterations)
-    # results['jsontoxml'] = timeit.timeit(json2xml_convert, number=num_iterations)
+    results['jsontoxml'] = timeit.timeit(json2xml_convert, number=num_iterations)
 
-    # Sort results by execution time
     sorted_results = sorted(results.items(), key=lambda x: x[1])
 
-    # Print results
     print("\nPerformance Comparison (sorted by fastest):")
     for method, time_taken in sorted_results:
         print(f"{method}: {time_taken} seconds")
 
-    # Calculate percentages relative to the fastest method
     fastest_time = sorted_results[0][1]
     percentages = {method: (time_taken / fastest_time) * 100 for method, time_taken in sorted_results}
 
-    # Print results with correct comparisons
     print("\nPerformance Comparison (sorted by fastest):")
     for i in range(len(sorted_results)):
         for j in range(i + 1, len(sorted_results)):
@@ -120,12 +110,12 @@ for num_iterations in num_iterations_list:
 
             if time_taken1 < time_taken2:
                 percentage_difference = (time_taken2 - time_taken1) / time_taken2 * 100
-                print(
-                    f"{method1} is {percentage_difference:.2f}% ({time_taken2 / time_taken1:.2f} times) faster than {method2}")
+                print(f"{method1} is {percentage_difference:.2f}% ({time_taken2 / time_taken1:.2f} times) faster than {method2}")
+
             elif time_taken1 > time_taken2:
                 percentage_difference = (time_taken1 - time_taken2) / time_taken1 * 100
-                print(
-                    f"{method2} is {percentage_difference:.2f}% ({time_taken1 / time_taken2:.2f} times) faster than {method1}")
+                print(f"{method2} is {percentage_difference:.2f}% ({time_taken1 / time_taken2:.2f} times) faster than {method1}")
+
             else:
                 print(f"{method1} and {method2} have equal performance")
 

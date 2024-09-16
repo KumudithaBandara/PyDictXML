@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "PyDictXML"
+version = "1.0"
+description = "PyDictXML is a high-performance Python library designed to seamlessly replace dicttoxml, offering users an improved experience in XML string generation. With PyDictXML, users can effortlessly transition from dicttoxml without any code-level changes, benefiting from enhanced performance and efficiency."
+authors = [
+    { name = "Kumuditha Bandara", email = "kumu.bandara.kb97@gmail.com" },
+]
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "GPLv2"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+homepage = "https://github.com/KumudithaBandara/PyDictXML"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+PyDictXML = "dicttoxml:main"

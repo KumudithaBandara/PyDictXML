@@ -1,7 +1,7 @@
 Summary
 =======
 
-Dict2XML is a high-performance Python library designed to seamlessly replace dicttoxml, offering users an improved experience in XML string generation. With Dict2XML, users can effortlessly transition from dicttoxml without any code-level changes, benefiting from enhanced performance and efficiency.
+PyDictXML is a high-performance Python library designed to seamlessly replace dicttoxml, offering users an improved experience in XML string generation. With PyDictXML, users can effortlessly transition from dicttoxml without any code-level changes, benefiting from enhanced performance and efficiency.
 
 Details
 =======
@@ -44,7 +44,7 @@ Installation
 
 The dicttoxml module is [published on the Python Package Index](https://pypi.python.org/pypi/dicttoxml), so you can install it using `pip`.
 
-    pip install Dict2XML
+    pip install PyDictXML
 
 Alternately, you can download the tarballed installer - `dicttoxml-[VERSION].tar.gz` - for this package from the [dist](https://github.com/quandyfactory/dicttoxml/tree/master/dist) directory on github and uncompress it. Then, from a terminal or command window, navigate into the unzipped folder and type the command:
 
@@ -296,13 +296,13 @@ To turn debug mode off, just call `set_debug` with an argument of `False`:
 
     >>> dicttoxml.set_debug(debug=False)
 
-If you encounter any errors in the code, please file an issue on github: [https://github.com/KumudithaBandara/Dict2XML/issues](https://github.com/KumudithaBandara/Dict2XML/issues).
+If you encounter any errors in the code, please file an issue on github: [https://github.com/KumudithaBandara/PyDictXML/issues](https://github.com/KumudithaBandara/PyDictXML/issues).
 
 Author
 ======
 
 * Author: Kumuditha Bandara
-* Repository: [https://github.com/KumudithaBandara/Dict2XML](https://github.com/KumudithaBandara/Dict2XML)
+* Repository: [https://github.com/KumudithaBandara/PyDictXML](https://github.com/KumudithaBandara/PyDictXML)
 
 Version
 =======
