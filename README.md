@@ -313,6 +313,13 @@ Version
 Revision History
 ================
 
+Version 1.0.1
+--------------
+
+* Release Date: 2024-09-17
+* Changes:
+    * Now package import similar to dicttoxml
+
 Version 1.0.0
 --------------
 

@@ -1,10 +1,11 @@
 import timeit
 import xml.etree.ElementTree as ET
-from lxml import etree
-from PyDictXML import dicttoxml as PyDictXML
-import dicttoxml
-from json2xml import json2xml
 
+import dicttoxml
+import pytest
+from PyDictXML import dicttoxml as PyDictXML
+from json2xml import json2xml
+from lxml import etree
 
 # Sample dictionary with various data types
 sample_dict = {
@@ -80,25 +81,26 @@ def dict_to_etree(d, parent):
             parent.append(child)
 
 
-# Perform benchmarking for different numbers of iterations
-num_iterations_list = [1, 10, 100, 500, 1000, 2000, 5000]
-
-for num_iterations in num_iterations_list:
+# Use pytest parametrize to run the benchmarks for different iterations
+@pytest.mark.parametrize("num_iterations", [1, 10, 100, 500, 1000, 2000, 5000])
+def test_benchmark_conversion_methods(num_iterations):
     print(f"\n\nBenchmarking for {num_iterations} iterations:")
     results = dict()
 
-    results['DictToXML'] = timeit.timeit(pydictxml_convert, number=num_iterations)
+    results['PyDictXML'] = timeit.timeit(pydictxml_convert, number=num_iterations)
     results['xml.etree.ElementTree'] = timeit.timeit(etree_convert, number=num_iterations)
     results['lxml'] = timeit.timeit(lxml_convert, number=num_iterations)
     results['dicttoxml'] = timeit.timeit(dicttoxml_convert, number=num_iterations)
-    results['jsontoxml'] = timeit.timeit(json2xml_convert, number=num_iterations)
+    results['json2xml'] = timeit.timeit(json2xml_convert, number=num_iterations)
 
+    # Sort results based on time
     sorted_results = sorted(results.items(), key=lambda x: x[1])
 
     print("\nPerformance Comparison (sorted by fastest):")
     for method, time_taken in sorted_results:
         print(f"{method}: {time_taken} seconds")
 
+    # Calculate performance percentage differences
     fastest_time = sorted_results[0][1]
     percentages = {method: (time_taken / fastest_time) * 100 for method, time_taken in sorted_results}
 
@@ -111,13 +113,9 @@ for num_iterations in num_iterations_list:
             if time_taken1 < time_taken2:
                 percentage_difference = (time_taken2 - time_taken1) / time_taken2 * 100
                 print(f"{method1} is {percentage_difference:.2f}% ({time_taken2 / time_taken1:.2f} times) faster than {method2}")
-
             elif time_taken1 > time_taken2:
                 percentage_difference = (time_taken1 - time_taken2) / time_taken1 * 100
                 print(f"{method2} is {percentage_difference:.2f}% ({time_taken1 / time_taken2:.2f} times) faster than {method1}")
-
             else:
                 print(f"{method1} and {method2} have equal performance")
-
-
 
