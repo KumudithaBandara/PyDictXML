@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="PyDictXML",
-    version="1.0",
+    version="1.0.1",
     description="PyDictXML is a high-performance Python library designed to seamlessly replace dicttoxml, offering users an improved experience in XML string generation.",  # Short description
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",

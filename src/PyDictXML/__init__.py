@@ -1,1 +1,1 @@
-from src.PyDictXML.PyDictXML import dicttoxml
+from .PyDictXML import dicttoxml
